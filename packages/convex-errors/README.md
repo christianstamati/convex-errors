@@ -53,7 +53,7 @@ import { errors } from "@my-app/backend/convex/errors";
 export const toMessage = (error: unknown) => errors.message(error);
 ```
 
-The frontend and backend packages can each resolve their own copy of `convex`. That's fine: errors are recognised by name and shape, not only by `instanceof ConvexError`.
+[`examples/monorepo`](../../examples/monorepo) in this repo is a working app laid out this way. The frontend and backend packages can each resolve their own copy of `convex`. That's fine: errors are recognised by name and shape, not only by `instanceof ConvexError`.
 
 ## Throw them
 
@@ -143,6 +143,8 @@ export const locale = errors.translate({
   fallback: m.something_went_wrong(),
 });
 ```
+
+[`examples/paraglide`](../../examples/paraglide) in this repo is a working TanStack Start app translated this way.
 
 Pass the locale to `errors.message(error, { locale })`, or let `createAttempt` read the current one on each failure:
 

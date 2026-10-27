@@ -1,0 +1,7 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "notes": "Notes",
+  "add": "Add",
+  "note_length": "A note must be 1 to {max} characters.",
+  "something_went_wrong": "Something went wrong. Try again."
+}

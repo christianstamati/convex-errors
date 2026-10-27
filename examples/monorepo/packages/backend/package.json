@@ -1,0 +1,19 @@
+{
+  "name": "@monorepo/backend",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./convex/_generated/*": "./convex/_generated/*.js",
+    "./convex/errors": "./convex/errors.ts"
+  },
+  "scripts": {
+    "dev": "convex dev"
+  },
+  "dependencies": {
+    "convex": "^1.48.0",
+    "convex-errors": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}

@@ -4,7 +4,10 @@
   "private": true,
   "workspaces": {
     "packages": [
-      "examples/*",
+      "examples/minimal",
+      "examples/paraglide",
+      "examples/monorepo/apps/*",
+      "examples/monorepo/packages/*",
       "packages/*"
     ],
     "catalog": {
@@ -15,10 +18,12 @@
   "type": "module",
   "scripts": {
     "dev": "bun run --cwd examples/minimal dev",
-    "build": "bun run --cwd packages/convex-errors build && bun run --cwd examples/minimal build",
+    "build": "bun run --cwd packages/convex-errors build && bun run --cwd examples/minimal build && bun run --cwd examples/monorepo/apps/web build && bun run --cwd examples/paraglide build",
     "check": "vp check",
     "test": "vp run --filter './packages/*' test",
-    "prepare": "vp config"
+    "prepare": "vp config && bun run --cwd examples/paraglide compile",
+    "dev:monorepo": "bun run --cwd examples/monorepo/apps/web dev",
+    "dev:paraglide": "bun run --cwd examples/paraglide dev"
   },
   "devDependencies": {
     "vite": "catalog:",

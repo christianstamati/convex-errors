@@ -1,0 +1,30 @@
+{
+  "name": "paraglide",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --cwd ../../packages/convex-errors build && bun run --parallel dev:lib dev:web dev:convex",
+    "dev:lib": "bun run --cwd ../../packages/convex-errors dev",
+    "dev:web": "vp dev --port 5175",
+    "dev:convex": "convex dev",
+    "build": "vp build",
+    "compile": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide"
+  },
+  "dependencies": {
+    "@inlang/paraglide-js": "^2.29.2",
+    "@tanstack/react-router": "1.170.46",
+    "@tanstack/react-start": "1.169.4",
+    "convex": "^1.48.0",
+    "convex-errors": "workspace:*",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^6.0.1",
+    "typescript": "^7.0.2",
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
+  }
+}
