@@ -1,0 +1,167 @@
+# @cs-stack/convex-errors
+
+> Typed error codes for Convex apps. Declare every error once in `convex/errors.ts`, throw it from a Convex function with `errors.create(code, params)`, and turn any caught error into a message for the user with `errors.message(error)` or a toast with `createAttempt`. Messages can be translated with any i18n library. A wrong code, a missing param or a translation that skips a code fails the type check.
+
+Install with `npm install @cs-stack/convex-errors`. The only peer dependency is `convex` 1.3 or newer. ESM only, Node 18 or newer. The package exports `defineErrors` and `createAttempt`, plus the types `Errors`, `Definitions`, `ErrorData`, `Issue`, `Locale`, `Messages`, `ParsedError` and `ReservedCode`.
+
+## Rules
+
+- Declare all codes in one file, `convex/errors.ts`, with `defineErrors`. It has no server code, so both Convex functions and the frontend import it.
+- Each code maps to a function that returns the default English message. Its one parameter is the code's params: an object of Convex values, or nothing.
+- `invalid_args` and `unknown` are reserved codes. Don't define them.
+- In Convex functions, `throw errors.create(code, params)`. Never `throw new Error(...)` or `new ConvexError("string")` for errors the user should see.
+- On the frontend, call mutations and actions through `attempt(promise, fallback?)`. It resolves to `true` or `false` and never rejects, so don't wrap it in `try`/`catch`.
+- Use `errors.is(error, code)` only when one error needs handling other than a toast.
+- For queries, use `useQuery` from `convex-helpers/react`, which returns the error, and `errors.message(result.error)`.
+- Files inside `convex/` import each other with relative paths (`./errors`). Frontend files use the `@convex/*` and `@/*` aliases from tsconfig `paths`, with no `baseUrl` (TypeScript 7 rejects it).
+
+## API
+
+- `defineErrors(definitions)` returns `errors` with:
+  - `errors.create(code, params?)`: a `ConvexError` whose `data` is `{ code, params, message }`. Throw it.
+  - `errors.message(error, { locale?, fallback? })`: the text to show for any caught value. Never throws.
+  - `errors.parse(error, fallback?)`: sorts any caught value into `{ code, params, message }` for an app error, `{ code: "invalid_args", issues, message }` for a Zod error, or `{ code: "unknown", message, error }` for anything else.
+  - `errors.is(error, code)`: a type guard. After it, `error.data.params` is typed.
+  - `errors.translate({ messages, fallback, invalidArgs? })`: a locale. `messages` needs every code, with each function taking that code's params. Returns the locale unchanged; it only type-checks it.
+- `createAttempt(errors, { onError, locale?, log? })` returns `attempt(work, fallback?)`.
+  - `onError(message, parsed)` shows the message, for example with `toast.error`.
+  - `locale` is a function called on each failure that returns the current locale, or `undefined` for the default English.
+  - `log` receives the raw error. Defaults to `console.error`.
+  - `work` is a promise that's already running, such as `create({ text })`.
+  - `fallback` is the message for errors that aren't app errors. It isn't translated, so pass a translated string.
+
+## Which message is shown
+
+- An app error shows its code's message, from the locale if one is passed, else the default.
+- A Zod validation error from convex-helpers' `zCustomMutation` shows `locale.invalidArgs(issues)` if set, else the first issue's message.
+- An old `new ConvexError("text")` shows its text.
+- A code this client doesn't know (from a newer server) shows the server's message, or `locale.fallback` when a locale is passed.
+- Anything else (a bug, a network failure) shows `fallback`, then `locale.fallback`, then "Something went wrong. Try again."
+
+## Recipes
+
+Declare the errors in `convex/errors.ts`:
+
+```ts
+import { defineErrors } from "@cs-stack/convex-errors";
+
+export const errors = defineErrors({
+  sign_in: () => "Sign in first.",
+  not_found: (p: { what: "bot" | "reminder" | "chat" }) => `That ${p.what} doesn't exist anymore.`,
+  too_many: (p: { what: "bots" | "notes"; max: number }) =>
+    `You can have at most ${p.max} ${p.what}.`,
+  file_too_large: (p: { maxMb: number }) => `Files can be at most ${p.maxMb} MB.`,
+});
+```
+
+Throw one from a mutation in `convex/bots.ts`:
+
+```ts
+import { v } from "convex/values";
+import { mutation } from "./_generated/server";
+import { errors } from "./errors";
+
+const MAX_BOTS = 5;
+
+export const createBot = mutation({
+  args: { projectId: v.string(), name: v.string() },
+  returns: v.id("bots"),
+  handler: async (ctx, { projectId, name }) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw errors.create("sign_in");
+
+    const bots = await ctx.db
+      .query("bots")
+      .withIndex("by_project", (q) => q.eq("projectId", projectId))
+      .take(MAX_BOTS);
+    if (bots.length >= MAX_BOTS) {
+      throw errors.create("too_many", { what: "bots", max: MAX_BOTS });
+    }
+    return await ctx.db.insert("bots", { projectId, name });
+  },
+});
+```
+
+Create one `attempt` for the app in `src/lib/attempt.ts`:
+
+```ts
+import { createAttempt } from "@cs-stack/convex-errors";
+import { toast } from "sonner";
+import { errors } from "@convex/errors";
+
+export const attempt = createAttempt(errors, { onError: (message) => toast.error(message) });
+```
+
+Run a mutation through it, and act only on success:
+
+```ts
+import { attempt } from "@/lib/attempt";
+
+export const saveNote = async (save: () => Promise<null>, close: () => void) => {
+  if (await attempt(save(), "Couldn't save the note.")) close();
+};
+```
+
+To use the mutation's result, chain it inside the promise so a failure there is reported too:
+
+```ts
+import { attempt } from "@/lib/attempt";
+
+export const createAndOpen = (createBot: () => Promise<string>, navigate: (id: string) => void) =>
+  attempt(createBot().then((id) => navigate(id)));
+```
+
+Translate with Paraglide. When the Paraglide message keys match the error codes, `messages: m` also works:
+
+```ts
+import { errors } from "@convex/errors";
+import { m } from "@/paraglide/messages.js";
+
+export const locale = errors.translate({
+  messages: {
+    sign_in: () => m.sign_in(),
+    not_found: (params) => m.not_found(params),
+    too_many: (params) => m.too_many(params),
+    file_too_large: (params) => m.file_too_large(params),
+  },
+  fallback: m.something_went_wrong(),
+});
+```
+
+Branch on one error:
+
+```ts
+import { errors } from "@convex/errors";
+
+export const onCreateBotError = (error: unknown) => {
+  if (errors.is(error, "too_many")) {
+    const { max } = error.data.params; // typed: { what: "bots" | "notes"; max: number }
+    return `Upgrade to have more than ${max} bots.`;
+  }
+  return errors.message(error);
+};
+```
+
+Show a query's error:
+
+```ts
+import { useQuery } from "convex-helpers/react";
+import { api } from "@convex/_generated/api";
+import { errors } from "@convex/errors";
+
+export const useBotsError = () => {
+  const result = useQuery(api.bots.list);
+  return result.status === "error" ? errors.message(result.error) : undefined;
+};
+```
+
+## Wire format
+
+`ConvexError.data` is `{ code, params, message }`, for example `{ "code": "not_found", "params": { "what": "bot" }, "message": "That bot doesn't exist anymore." }`. `params` is left out for a code without params. `message` is the default English text.
+
+## Links
+
+- [README](https://github.com/christianstamati/convex-errors/blob/main/packages/convex-errors/README.md): the full guide
+- [SKILL.md](https://raw.githubusercontent.com/christianstamati/convex-errors/main/packages/convex-errors/SKILL.md): an agent skill for adding the library to a Convex app
+- [Minimal example](https://github.com/christianstamati/convex-errors/tree/main/examples/minimal): Vite + React
+- [Paraglide example](https://github.com/christianstamati/convex-errors/tree/main/examples/paraglide): TanStack Start in English and Italian

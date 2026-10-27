@@ -1,4 +1,4 @@
-import { errors } from "../../convex/errors";
+import { errors } from "@convex/errors";
 
 export const de = errors.translate({
   messages: {

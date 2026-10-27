@@ -1,5 +1,5 @@
-import { errors } from "../../convex/errors";
-import { m } from "../paraglide/messages.js";
+import { errors } from "@convex/errors";
+import { m } from "@/paraglide/messages.js";
 
 export const locale = errors.translate({
   messages: {

@@ -30,6 +30,13 @@ One consistent, typed way to define, throw, catch, show and translate errors in 
 - Translation works with any library, or none.
 - Move over one error at a time: old `new ConvexError("…")` strings still show their text.
 
+### For LLMs and AI agents
+
+- [llms.txt](https://raw.githubusercontent.com/christianstamati/convex-errors/main/packages/convex-errors/llms.txt): the whole API, which message is shown when, and type-checked recipes in one file
+- [SKILL.md](https://raw.githubusercontent.com/christianstamati/convex-errors/main/packages/convex-errors/SKILL.md): an agent skill for adding the library to a Convex app
+
+Both also ship in the npm package, as `node_modules/@cs-stack/convex-errors/llms.txt` and `SKILL.md`.
+
 ## Install
 
 ```sh
@@ -37,6 +44,23 @@ npm install @cs-stack/convex-errors
 ```
 
 `convex` 1.3 or newer is the only peer dependency. ESM only, Node 18 or newer.
+
+### Path aliases
+
+The frontend samples below import `@convex/errors` instead of `../../convex/errors`. Add these paths to the frontend's `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "paths": {
+      "@convex/*": ["./convex/*"],
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+The paths are relative to the `tsconfig.json`, so `baseUrl` isn't needed. TypeScript 7 rejects it. Your bundler needs the same aliases. Vite doesn't read `paths` on its own, so add the `vite-tsconfig-paths` plugin or the same entries under `resolve.alias`. Files inside `convex/` keep importing each other with relative paths, like `./errors`.
 
 ## Declare the errors
 
@@ -116,7 +140,7 @@ export const createBot = mutation({
 ```ts
 import { createAttempt } from "@cs-stack/convex-errors";
 import { toast } from "sonner";
-import { errors } from "../../convex/errors";
+import { errors } from "@convex/errors";
 
 export const attempt = createAttempt(errors, { onError: (message) => toast.error(message) });
 ```
@@ -124,7 +148,7 @@ export const attempt = createAttempt(errors, { onError: (message) => toast.error
 `attempt` resolves to `true` when the work succeeds and `false` when it fails, and it never rejects. Use the result for what should only happen on success. Every failure shows a toast. An app error shows its own message. The second argument is the message for anything else, such as a bug or a network failure:
 
 ```ts
-import { attempt } from "./lib/attempt";
+import { attempt } from "@/lib/attempt";
 
 export const saveNote = async (save: () => Promise<null>, close: () => void) => {
   if (await attempt(save(), "Couldn't save the note.")) close();
@@ -136,7 +160,7 @@ Without the second argument, that message is the locale's `fallback`, or "Someth
 To use the mutation's result, chain it into the promise you pass, so a failure there is reported the same way:
 
 ```ts
-import { attempt } from "./lib/attempt";
+import { attempt } from "@/lib/attempt";
 
 export const createAndOpen = (createBot: () => Promise<string>, navigate: (id: string) => void) =>
   attempt(createBot().then((id) => navigate(id)));
@@ -153,7 +177,7 @@ Without `createAttempt`, `errors.message(error)` gives the text for any caught e
 With a plain object, in `src/lib/de.ts`:
 
 ```ts
-import { errors } from "../../convex/errors";
+import { errors } from "@convex/errors";
 
 export const de = errors.translate({
   messages: {
@@ -171,8 +195,8 @@ export const de = errors.translate({
 With Paraglide, call its message functions:
 
 ```ts
-import { errors } from "../../convex/errors";
-import { m } from "../paraglide/messages.js";
+import { errors } from "@convex/errors";
+import { m } from "@/paraglide/messages.js";
 
 export const locale = errors.translate({
   messages: {
@@ -192,8 +216,8 @@ Pass the locale to `errors.message(error, { locale })`, or give `createAttempt` 
 ```ts
 import { createAttempt } from "@cs-stack/convex-errors";
 import { toast } from "sonner";
-import { errors } from "../../convex/errors";
-import { de } from "./de";
+import { errors } from "@convex/errors";
+import { de } from "@/lib/de";
 
 export const attempt = createAttempt(errors, {
   onError: (message) => toast.error(message),
@@ -210,7 +234,7 @@ A locale can also set `invalidArgs: (issues) => "…"` to word Zod validation er
 `errors.is` narrows the error, so its params are typed:
 
 ```ts
-import { errors } from "../convex/errors";
+import { errors } from "@convex/errors";
 
 export const onCreateBotError = (error: unknown) => {
   if (errors.is(error, "too_many")) {
@@ -231,8 +255,8 @@ export const onCreateBotError = (error: unknown) => {
 
 ```ts
 import { useQuery } from "convex-helpers/react";
-import { api } from "../convex/_generated/api";
-import { errors } from "../convex/errors";
+import { api } from "@convex/_generated/api";
+import { errors } from "@convex/errors";
 
 export const useBotsError = () => {
   const result = useQuery(api.bots.list);

@@ -16,7 +16,9 @@
     "directory": "packages/convex-errors"
   },
   "files": [
-    "dist"
+    "dist",
+    "llms.txt",
+    "SKILL.md"
   ],
   "type": "module",
   "exports": {

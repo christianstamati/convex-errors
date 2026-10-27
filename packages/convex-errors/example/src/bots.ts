@@ -1,4 +1,4 @@
-import { errors } from "../convex/errors";
+import { errors } from "@convex/errors";
 
 export const onCreateBotError = (error: unknown) => {
   if (errors.is(error, "too_many")) {

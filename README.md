@@ -18,6 +18,8 @@ This repo holds [`@cs-stack/convex-errors`](https://www.npmjs.com/package/@cs-st
 
 **To use the library, read [packages/convex-errors/README.md](packages/convex-errors/README.md).** It covers installing, declaring, throwing, showing and translating errors.
 
+For LLMs and AI agents: [llms.txt](packages/convex-errors/llms.txt) has the whole API in one file, and [SKILL.md](packages/convex-errors/SKILL.md) is an agent skill for adding the library to an app.
+
 ```
 packages/convex-errors/   the library
 examples/minimal/         a Vite + React app with its Convex functions in convex/

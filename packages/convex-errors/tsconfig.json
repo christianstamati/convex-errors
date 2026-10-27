@@ -12,6 +12,8 @@
     "types": ["vite/client", "node"],
     "customConditions": ["@convex-errors/source"],
     "paths": {
+      "@convex/*": ["./example/convex/*"],
+      "@/*": ["./example/src/*"],
       "@my-app/backend/convex/errors": ["./example/convex/errors.ts"]
     }
   },
