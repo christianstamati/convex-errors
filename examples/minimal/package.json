@@ -1,9 +1,10 @@
 {
-  "name": "demo",
+  "name": "minimal",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "bun run --parallel dev:web dev:convex",
+    "dev": "bun run --cwd ../../packages/convex-errors build && bun run --parallel dev:lib dev:web dev:convex",
+    "dev:lib": "bun run --cwd ../../packages/convex-errors dev",
     "dev:web": "vp dev",
     "dev:convex": "convex dev",
     "build": "vp build"

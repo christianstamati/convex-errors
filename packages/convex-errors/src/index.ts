@@ -1,6 +1,6 @@
-export { defineErrors } from "./define";
-export type { Errors } from "./define";
-export { createAttempt } from "./attempt";
+export { defineErrors } from "./define.js";
+export type { Errors } from "./define.js";
+export { createAttempt } from "./attempt.js";
 export type {
   Definitions,
   ErrorData,
@@ -9,4 +9,4 @@ export type {
   Messages,
   ParsedError,
   ReservedCode,
-} from "./types";
+} from "./types.js";

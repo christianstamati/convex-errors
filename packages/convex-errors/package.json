@@ -13,26 +13,26 @@
   ],
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
-  },
-  "publishConfig": {
-    "exports": {
-      ".": {
-        "types": "./dist/index.d.ts",
-        "import": "./dist/index.js"
-      }
+    ".": {
+      "@convex-errors/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     }
   },
   "scripts": {
     "build": "tsdown && tsc -p tsconfig.build.json",
+    "dev": "tsdown --watch",
     "test": "vp test run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "example": "bun --conditions=@convex-errors/source example/demo.ts"
   },
   "devDependencies": {
     "@edge-runtime/vm": "^5.0.0",
+    "@types/node": "^24",
     "convex": "^1.48.0",
     "convex-helpers": "^0.1.129",
     "convex-test": "^0.0.65",
+    "sonner": "^2.0.8",
     "tsdown": "^0.23.2",
     "typescript": "^7.0.2",
     "vite-plus": "catalog:",

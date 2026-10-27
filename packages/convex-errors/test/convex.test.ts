@@ -6,6 +6,7 @@ import schema from "./convex/schema";
 
 const createBot = makeFunctionReference<"mutation", { name: string }>("bots:createBot");
 const rename = makeFunctionReference<"mutation", { name: string }>("bots:rename");
+const whoami = makeFunctionReference<"mutation">("bots:whoami");
 const modules = import.meta.glob("./convex/**/*.ts");
 
 test("an app error survives a mutation", async () => {
@@ -21,4 +22,11 @@ test("a Zod error survives a mutation", async () => {
   const t = convexTest(schema, modules);
   const e = await t.mutation(rename, { name: "x" }).catch((error: unknown) => error);
   expect(errors.parse(e).code).toBe("invalid_args");
+});
+
+test("an error without params survives a mutation", async () => {
+  const t = convexTest(schema, modules);
+  const e = await t.mutation(whoami, {}).catch((error: unknown) => error);
+  expect(errors.is(e, "sign_in")).toBe(true);
+  expect(errors.message(e)).toBe("Sign in first.");
 });

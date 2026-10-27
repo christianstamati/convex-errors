@@ -4,7 +4,7 @@ A library for errors in Convex apps.
 
 ```
 packages/convex-errors/   the library
-apps/demo/                a Vite + React app with a Convex backend that uses it
+examples/minimal/         a Vite + React app with a Convex backend that uses it
 ```
 
 ## Develop

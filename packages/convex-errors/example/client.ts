@@ -1,5 +1,5 @@
 // The frontend: src/lib/errors.ts and a component, without React so the spike runs anywhere.
-import { createAttempt } from "../src/index";
+import { createAttempt } from "convex-errors";
 import { errors } from "./errors";
 
 // German messages. Leaving out a code, or reading a param that doesn't exist, fails the type check.

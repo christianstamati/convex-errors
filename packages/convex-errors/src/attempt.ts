@@ -1,9 +1,11 @@
-import type { Errors } from "./define";
-import type { Definitions, Locale, ParsedError } from "./types";
+import type { Errors } from "./define.js";
+import type { Definitions, Locale, ParsedError } from "./types.js";
 
 /**
  * Runs what a click started and reports a failure instead of losing it as an
  * unhandled rejection. Plug in your own toast: `onError: (m) => toast.error(m)`.
+ * Resolves to whether the work succeeded, and never rejects:
+ * `if (await attempt(save(note))) close()`.
  */
 export const createAttempt =
   <D extends Definitions>(
@@ -16,12 +18,17 @@ export const createAttempt =
       log?: (error: unknown) => void;
     },
   ) =>
-  async (work: Promise<unknown>, fallback?: string): Promise<void> => {
+  async (work: Promise<unknown>, fallback?: string): Promise<boolean> => {
     try {
       await work;
+      return true;
     } catch (error) {
       try {
         (options.log ?? console.error)(error);
+      } catch {
+        // A broken logger mustn't stop the user from seeing the error.
+      }
+      try {
         options.onError(
           errors.message(error, { fallback, locale: options.locale?.() }),
           errors.parse(error, fallback),
@@ -29,5 +36,6 @@ export const createAttempt =
       } catch {
         // A broken toast must not turn into an unhandled rejection.
       }
+      return false;
     }
   };

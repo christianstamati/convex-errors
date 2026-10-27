@@ -1,6 +1,6 @@
 // The app's errors, declared once. Lives in convex/errors.ts so both the
 // backend and the frontend import it. It has no server code.
-import { defineErrors } from "../src/index";
+import { defineErrors } from "convex-errors";
 
 export const errors = defineErrors({
   sign_in: () => "Sign in first.",

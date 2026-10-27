@@ -9,7 +9,11 @@
     "noEmit": true,
     "skipLibCheck": true,
     "strict": true,
-    "types": ["vite/client"]
+    "types": ["vite/client", "node"],
+    "customConditions": ["@convex-errors/source"],
+    "paths": {
+      "@my-app/backend/convex/errors": ["./example/errors.ts"]
+    }
   },
   "include": ["src", "test", "example"]
 }

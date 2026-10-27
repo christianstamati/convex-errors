@@ -1,6 +1,6 @@
 import { ConvexError } from "convex/values";
 import type { Value } from "convex/values";
-import type { ErrorData, Issue, ParsedError, Definitions } from "./types";
+import type { ErrorData, Issue, ParsedError, Definitions } from "./types.js";
 
 export const DEFAULT_FALLBACK = "Something went wrong. Try again.";
 

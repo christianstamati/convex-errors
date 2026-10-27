@@ -16,6 +16,14 @@ export const createBot = mutationGeneric({
   },
 });
 
+export const whoami = mutationGeneric({
+  args: {},
+  handler: async (ctx) => {
+    if (!(await ctx.auth.getUserIdentity())) throw errors.create("sign_in");
+    return null;
+  },
+});
+
 const zMutation = zCustomMutation(mutationGeneric, NoOp);
 
 export const rename = zMutation({

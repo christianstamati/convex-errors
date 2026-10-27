@@ -9,7 +9,8 @@
     "noEmit": true,
     "skipLibCheck": true,
     "strict": true,
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "customConditions": ["@convex-errors/source"]
   },
   "include": ["src", "vite.config.ts"]
 }

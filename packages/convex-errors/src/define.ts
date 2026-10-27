@@ -1,6 +1,6 @@
 import { ConvexError } from "convex/values";
 import type { Value } from "convex/values";
-import { DEFAULT_FALLBACK, isConvexError, parseError } from "./parse";
+import { DEFAULT_FALLBACK, isConvexError, parseError } from "./parse.js";
 import type {
   Checked,
   Definitions,
@@ -8,7 +8,7 @@ import type {
   InvalidArgsError,
   Locale,
   ParsedError,
-} from "./types";
+} from "./types.js";
 
 type MessageOptions<D extends Definitions> = {
   /** Shown for errors that aren't app errors or validation errors. */

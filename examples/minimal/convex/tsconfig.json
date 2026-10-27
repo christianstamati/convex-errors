@@ -12,7 +12,8 @@
     "module": "ESNext",
     "isolatedModules": true,
     "noEmit": true,
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "customConditions": ["@convex-errors/source"]
   },
   "include": ["./**/*"],
   "exclude": ["./_generated"]
