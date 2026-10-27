@@ -29,6 +29,7 @@
       },
       "devDependencies": {
         "@cloudflare/vite-plugin": "^1.65.0",
+        "@tanstack-convex-starter/tsconfig": "workspace:*",
         "@tanstack/devtools-vite": "0.8.5",
         "@tanstack/router-cli": "^1.132.0",
         "@types/node": "^22.10.2",
@@ -55,6 +56,10 @@
         "vite-plus": "catalog:",
       },
     },
+    "packages/tsconfig": {
+      "name": "@tanstack-convex-starter/tsconfig",
+      "version": "0.0.0",
+    },
     "packages/ui": {
       "name": "@tanstack-convex-starter/ui",
       "version": "0.0.0",
@@ -72,6 +77,7 @@
       },
       "devDependencies": {
         "@tailwindcss/vite": "^4",
+        "@tanstack-convex-starter/tsconfig": "workspace:*",
         "@types/node": "^22",
         "@types/react": "^19",
         "@types/react-dom": "^19",
@@ -533,6 +539,8 @@
     "@tailwindcss/vite": ["@tailwindcss/vite@4.3.3", "", { "dependencies": { "@tailwindcss/node": "4.3.3", "@tailwindcss/oxide": "4.3.3", "tailwindcss": "4.3.3" }, "peerDependencies": { "vite": "^5.2.0 || ^6 || ^7 || ^8" } }, "sha512-yYU8cogLeSh/ms2jh8Fj7jaba/EWa7Ja6GoUqYZaraEuCI5YS6ms6ObZgjjedm+jm6XZjdNRWBpPP6Z86oOxcw=="],
 
     "@tanstack-convex-starter/backend": ["@tanstack-convex-starter/backend@workspace:packages/backend"],
+
+    "@tanstack-convex-starter/tsconfig": ["@tanstack-convex-starter/tsconfig@workspace:packages/tsconfig"],
 
     "@tanstack-convex-starter/ui": ["@tanstack-convex-starter/ui@workspace:packages/ui"],
 
