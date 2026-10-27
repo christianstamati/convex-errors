@@ -79,7 +79,7 @@
     },
     "packages/convex-errors": {
       "name": "@cs-stack/convex-errors",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "devDependencies": {
         "@edge-runtime/vm": "^5.0.0",
         "@types/node": "^24",

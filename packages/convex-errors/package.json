@@ -1,6 +1,6 @@
 {
   "name": "@cs-stack/convex-errors",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "One consistent, typed way to define, throw, catch, show and translate errors in Convex apps.",
   "keywords": [
     "convex",
