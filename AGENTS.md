@@ -13,8 +13,8 @@ packages/ui/       shadcn/ui components on Base UI, plus the shared globals.css
 scripts/           setup.ts, sync-env.ts, cloudflare-build.ts
 ```
 
-Workspace packages use the `@cloud-stack/` scope. The web app imports the Convex API as
-`@cloud-stack/backend/convex/_generated/api` and components as `@cloud-stack/ui/components/<name>`.
+Workspace packages use the `@tanstack-convex-starter/` scope. The web app imports the Convex API as
+`@tanstack-convex-starter/backend/convex/_generated/api` and components as `@tanstack-convex-starter/ui/components/<name>`.
 Inside apps/web, `#/` maps to `src/`.
 
 ## Commands

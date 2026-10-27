@@ -14,8 +14,8 @@
     "components": "@/components",
     "hooks": "@/hooks",
     "lib": "@/lib",
-    "utils": "@cloud-stack/ui/lib/utils",
-    "ui": "@cloud-stack/ui/components"
+    "utils": "@tanstack-convex-starter/ui/lib/utils",
+    "ui": "@tanstack-convex-starter/ui/components"
   },
   "rtl": false,
   "menuColor": "default",

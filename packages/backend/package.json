@@ -1,5 +1,5 @@
 {
-  "name": "@cloud-stack/backend",
+  "name": "@tanstack-convex-starter/backend",
   "version": "0.0.0",
   "private": true,
   "type": "module",

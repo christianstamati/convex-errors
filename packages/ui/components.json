@@ -11,11 +11,11 @@
   },
   "iconLibrary": "lucide",
   "aliases": {
-    "components": "@cloud-stack/ui/components",
-    "utils": "@cloud-stack/ui/lib/utils",
-    "hooks": "@cloud-stack/ui/hooks",
-    "lib": "@cloud-stack/ui/lib",
-    "ui": "@cloud-stack/ui/components"
+    "components": "@tanstack-convex-starter/ui/components",
+    "utils": "@tanstack-convex-starter/ui/lib/utils",
+    "hooks": "@tanstack-convex-starter/ui/hooks",
+    "lib": "@tanstack-convex-starter/ui/lib",
+    "ui": "@tanstack-convex-starter/ui/components"
   },
   "rtl": false,
   "menuColor": "default",

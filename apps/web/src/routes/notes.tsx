@@ -1,15 +1,15 @@
 // Example feature: delete this file (and the link on the home page) to remove it.
 import { convexQuery, useConvexMutation } from "@convex-dev/react-query";
-import { api } from "@cloud-stack/backend/convex/_generated/api";
-import { Button } from "@cloud-stack/ui/components/button";
+import { api } from "@tanstack-convex-starter/backend/convex/_generated/api";
+import { Button } from "@tanstack-convex-starter/ui/components/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@cloud-stack/ui/components/card";
-import { Input } from "@cloud-stack/ui/components/input";
+} from "@tanstack-convex-starter/ui/components/card";
+import { Input } from "@tanstack-convex-starter/ui/components/input";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";

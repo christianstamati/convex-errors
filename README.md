@@ -1,8 +1,9 @@
-# cloud-stack
+# tanstack-convex-starter
 
-A TypeScript monorepo with a TanStack Start web app, a Convex backend and shadcn/ui on
-Base UI. It includes one example feature, a notes list, to show the wiring end to end. There
-is no sign-in: every Convex function is public, so add auth before you store anything private.
+A boilerplate TypeScript monorepo with a TanStack Start web app, a Convex backend and
+shadcn/ui on Base UI, set up to deploy to Cloudflare Workers. It includes one example
+feature, a notes list, to show the wiring end to end. There is no sign-in: every Convex
+function is public, so add auth before you store anything private.
 
 ## Stack
 
@@ -66,15 +67,15 @@ deployed yet. When you're ready:
 3. In the Cloudflare dashboard, go to Workers & Pages > Create > Import a repository, pick
    this repo and set:
 
-   | Setting         | Value                                                    |
-   | --------------- | -------------------------------------------------------- |
-   | Project name    | `cloud-stack`, the `name` in `apps/web/wrangler.jsonc`   |
-   | Root directory  | `apps/web`                                               |
-   | Build command   | `bun run build:cloudflare`                               |
-   | Deploy command  | `bunx wrangler deploy`                                   |
-   | Preview command | `bunx wrangler preview`                                  |
-   | Build variables | `BUN_VERSION` = `1.4.4`, `SKIP_DEPENDENCY_INSTALL` = `1` |
-   | Build secrets   | `CONVEX_DEPLOY_KEY`, `CONVEX_PREVIEW_DEPLOY_KEY`         |
+   | Setting         | Value                                                              |
+   | --------------- | ------------------------------------------------------------------ |
+   | Project name    | `tanstack-convex-starter`, the `name` in `apps/web/wrangler.jsonc` |
+   | Root directory  | `apps/web`                                                         |
+   | Build command   | `bun run build:cloudflare`                                         |
+   | Deploy command  | `bunx wrangler deploy`                                             |
+   | Preview command | `bunx wrangler preview`                                            |
+   | Build variables | `BUN_VERSION` = `1.4.4`, `SKIP_DEPENDENCY_INSTALL` = `1`           |
+   | Build secrets   | `CONVEX_DEPLOY_KEY`, `CONVEX_PREVIEW_DEPLOY_KEY`                   |
 
    Then check that Settings > Build > Branch control has `main` as the production branch
    and Enable Preview Builds turned on. The commands use `bunx`, not the default `npx`,
@@ -91,7 +92,7 @@ reports each build as a check on the commit.
 There is no separate CI. The build script runs `bun run check` and `bun run test` before
 `convex deploy`, so a failing check stops both preview and production deploys. `main` is
 protected: changes go in through a pull request, and the PR can only merge once its
-Cloudflare build (the `Workers Builds: cloud-stack` check) passes. Each PR gets a
+Cloudflare build (the `Workers Builds: tanstack-convex-starter` check) passes. Each PR gets a
 Cloudflare preview, and merging deploys production. Admins can still push to `main`
 directly; the build still runs the checks, but nothing blocks the push itself. `bun run dev` and `vp preview` run the app in
 workerd, the Workers runtime, so what you test locally is what deploys.

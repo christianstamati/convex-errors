@@ -9,7 +9,7 @@
     "strict": true,
     "noEmit": true,
     "paths": {
-      "@cloud-stack/ui/*": ["./src/*"]
+      "@tanstack-convex-starter/ui/*": ["./src/*"]
     }
   },
   "include": ["."],

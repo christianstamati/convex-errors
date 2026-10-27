@@ -1,5 +1,5 @@
 {
-  "name": "@cloud-stack/ui",
+  "name": "@tanstack-convex-starter/ui",
   "version": "0.0.0",
   "private": true,
   "type": "module",
