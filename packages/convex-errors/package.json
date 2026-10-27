@@ -1,13 +1,20 @@
 {
   "name": "convex-errors",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "One consistent, typed way to define, throw, catch, show and translate errors in Convex apps.",
   "keywords": [
     "convex",
     "errors",
     "i18n"
   ],
+  "homepage": "https://github.com/christianstamati/convex-errors/tree/main/packages/convex-errors#readme",
+  "bugs": "https://github.com/christianstamati/convex-errors/issues",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christianstamati/convex-errors.git",
+    "directory": "packages/convex-errors"
+  },
   "files": [
     "dist"
   ],
