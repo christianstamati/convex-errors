@@ -12,9 +12,6 @@ examples/minimal/        Plain Vite + React app that uses the library
   convex/                Its Convex functions in models/<table>/, made public in api/, and schema.
                          _generated/ is committed, never edit it
                          (_generated/ai/ holds Convex's guidelines.md for agents)
-examples/monorepo/       The same app with Convex in its own package, laid out like a monorepo app
-  apps/web/              Vite + React. Imports the API and the errors from @monorepo/backend
-  packages/backend/      Convex functions in convex/models/<table>/, made public in convex/api/
 examples/paraglide/      The minimal app on TanStack Start, translated with Paraglide (en, it).
                          src/paraglide/ is compiled by `bun install` (prepare) and not committed
 convex.json              Points the Convex CLI at examples/minimal/convex/ when run from the root
@@ -34,7 +31,6 @@ Run everything from the repo root with Bun.
 | ----------------------- | ----------------------------------------------------------------------- |
 | `bun install`           | Install dependencies and the Vite+ git hooks                            |
 | `bun run dev`           | Local Convex deployment and examples/minimal on http://localhost:5173   |
-| `bun run dev:monorepo`  | Local Convex deployment and examples/monorepo on http://localhost:5174  |
 | `bun run dev:paraglide` | Local Convex deployment and examples/paraglide on http://localhost:5175 |
 | `bun run check`         | Format, lint and type check (`vp check`). Fix with `vp check --fix`     |
 | `bun run test`          | Library unit tests (Vitest via `vp test`)                               |
@@ -50,7 +46,7 @@ The pre-commit hook runs `vp check --fix` on staged files. Don't skip it with `-
 - Each app and package has its own standalone tsconfig.json that includes only its own files.
   The root tsconfig.json covers only `vite.config.ts`.
 - Env vars a Convex function needs must be set with `bunx convex env set` in the example's
-  Convex folder: examples/minimal, examples/paraglide or examples/monorepo/packages/backend.
+  Convex folder: examples/minimal or examples/paraglide.
 - The Convex agent skills, `skills-lock.json` and `examples/minimal/convex/_generated/ai/` come from
   `npx convex ai-files install`. Don't edit them by hand; `vp check` skips the skills.
 

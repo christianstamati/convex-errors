@@ -8,12 +8,6 @@
       "port": 5173
     },
     {
-      "name": "monorepo",
-      "runtimeExecutable": "bun",
-      "runtimeArgs": ["run", "dev:monorepo"],
-      "port": 5174
-    },
-    {
       "name": "paraglide",
       "runtimeExecutable": "bun",
       "runtimeArgs": ["run", "dev:paraglide"],

@@ -1,3 +1,25 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/header/glow.svg?title=convex-errors&subtitle=Typed+errors+for+Convex,+from+throw+to+toast&logo=lu:ShieldAlert&theme=orange&mode=dark">
+    <img alt="convex-errors: typed errors for Convex, from throw to toast" src="https://shieldcn.dev/header/glow.svg?title=convex-errors&subtitle=Typed+errors+for+Convex,+from+throw+to+toast&logo=lu:ShieldAlert&theme=orange&mode=light">
+  </picture>
+</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/@cs-stack/convex-errors"><img alt="npm version" src="https://shieldcn.dev/npm/@cs-stack/convex-errors.svg"></a>
+  <a href="./LICENSE"><img alt="MIT license" src="https://shieldcn.dev/npm/license/@cs-stack/convex-errors.svg"></a>
+  <a href="https://github.com/christianstamati/convex-errors"><img alt="GitHub stars" src="https://shieldcn.dev/github/stars/christianstamati/convex-errors.svg"></a>
+</p>
+
+<p align="center">
+  <a href="#install">Install</a> ·
+  <a href="#declare-the-errors">Declare</a> ·
+  <a href="#throw-them">Throw</a> ·
+  <a href="#show-them">Show</a> ·
+  <a href="#translate-them">Translate</a> ·
+  <a href="#queries">Queries</a>
+</p>
+
 # @cs-stack/convex-errors
 
 One consistent, typed way to define, throw, catch, show and translate errors in a Convex app.
@@ -53,7 +75,7 @@ import { errors } from "@my-app/backend/convex/errors";
 export const toMessage = (error: unknown) => errors.message(error);
 ```
 
-[`examples/monorepo`](../../examples/monorepo) in this repo is a working app laid out this way. The frontend and backend packages can each resolve their own copy of `convex`. That's fine, because errors are recognised by name and shape, not only by `instanceof ConvexError`.
+The frontend and backend packages can each resolve their own copy of `convex`. That's fine, because errors are recognised by name and shape, not only by `instanceof ConvexError`.
 
 ## Throw them
 
