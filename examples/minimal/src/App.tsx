@@ -1,11 +1,10 @@
 import { useMutation, useQuery } from "convex/react";
 import { useState } from "react";
-import { api } from "../convex/_generated/api";
-import { errors } from "../convex/errors";
+import { api } from "./lib/api";
+import { attempt } from "./lib/attempt";
 
 export function App() {
   const [text, setText] = useState("");
-  const [error, setError] = useState<string>();
   const notes = useQuery(api.notes.list);
   const create = useMutation(api.notes.create);
 
@@ -15,13 +14,7 @@ export function App() {
       <form
         onSubmit={async (event) => {
           event.preventDefault();
-          try {
-            await create({ text });
-            setText("");
-            setError(undefined);
-          } catch (e) {
-            setError(errors.message(e, { fallback: "Couldn't add the note." }));
-          }
+          if (await attempt(create({ text }), "Couldn't add the note.")) setText("");
         }}
       >
         <input
@@ -31,7 +24,6 @@ export function App() {
         />
         <button type="submit">Add</button>
       </form>
-      {error && <p role="alert">{error}</p>}
       <ul>
         {notes?.map((note) => (
           <li key={note._id}>{note.text}</li>

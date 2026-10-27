@@ -1,22 +1,26 @@
 import { v } from "convex/values";
-import { errors } from "./errors";
-import { mutation, query } from "./_generated/server";
+import { mutation, query } from "../../_generated/server";
+import { errors } from "../../errors";
 
-export const list = query({
+const MAX_LENGTH = 500;
+
+const list = query({
   args: {},
   handler: async (ctx) => {
     return await ctx.db.query("notes").order("desc").take(100);
   },
 });
 
-export const create = mutation({
+const create = mutation({
   args: { text: v.string() },
   returns: v.id("notes"),
   handler: async (ctx, { text }) => {
     const trimmed = text.trim();
-    if (trimmed.length === 0 || trimmed.length > 500) {
-      throw errors.create("note_length", { max: 500 });
+    if (trimmed.length === 0 || trimmed.length > MAX_LENGTH) {
+      throw errors.create("note_length", { max: MAX_LENGTH });
     }
     return await ctx.db.insert("notes", { text: trimmed });
   },
 });
+
+export const notesApi = { list, create };

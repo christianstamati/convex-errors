@@ -1,6 +1,6 @@
-import { defineSchema, defineTable } from "convex/server";
-import { v } from "convex/values";
+import { defineSchema } from "convex/server";
+import { notesTable } from "./models/notes/table";
 
 export default defineSchema({
-  notes: defineTable({ text: v.string() }),
+  notes: notesTable,
 });

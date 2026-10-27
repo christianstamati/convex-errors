@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQuery } from "convex/react";
 import { useState } from "react";
-import { api } from "../../convex/_generated/api";
+import { api } from "../lib/api";
 import { errorMessage } from "../lib/errors";
 import { m } from "../paraglide/messages.js";
 import { setLocale } from "../paraglide/runtime.js";

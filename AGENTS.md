@@ -9,7 +9,8 @@ This repo is for building the `convex-errors` library. The examples only exist t
 ```
 packages/convex-errors/  The library: src/, tests in test/, README samples in example/
 examples/minimal/        Plain Vite + React app that uses the library
-  convex/                Its Convex functions and schema. _generated/ is committed, never edit it
+  convex/                Its Convex functions in models/<table>/, made public in api/, and schema.
+                         _generated/ is committed, never edit it
                          (_generated/ai/ holds Convex's guidelines.md for agents)
 examples/monorepo/       The same app with Convex in its own package, laid out like a monorepo app
   apps/web/              Vite + React. Imports the API and the errors from @monorepo/backend
