@@ -1,0 +1,42 @@
+{
+  "name": "cloud-stack",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ],
+    "catalog": {
+      "vite": "npm:@voidzero-dev/vite-plus-core@1.4.0",
+      "vite-plus": "1.4.0"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "setup": "bun scripts/setup.ts",
+    "dev": "bun scripts/sync-env.ts && vp run --parallel --log labeled --filter './apps/*' --filter './packages/*' dev",
+    "build": "vp run --filter './apps/*' build",
+    "check": "vp check",
+    "test": "vp run --filter './apps/*' --filter './packages/*' test",
+    "prepare": "vp config"
+  },
+  "devDependencies": {
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "overrides": {
+    "vite": "catalog:"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "bun",
+      "version": "1.4.4",
+      "onFail": "download"
+    }
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "packageManager": "bun@1.4.4"
+}

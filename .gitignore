@@ -1,0 +1,43 @@
+# cstack bootstrap prompt (never commit)
+.cstack/BOOTSTRAP.md
+
+# dependencies
+node_modules/
+
+# build output
+dist/
+.output/
+.vinxi/
+.nitro/
+.tanstack/
+.wrangler/
+
+# env
+.env
+.env.local
+.env.*.local
+
+# convex local deployment state
+.convex/
+
+# tests
+coverage/
+
+# misc
+.DS_Store
+*.log
+*.tsbuildinfo
+
+# dotenv (keep the documented example)
+.env.*
+!.env.example
+
+# editors
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea
+*.sw?
+
+# AI agent worktrees
+.claude/worktrees/

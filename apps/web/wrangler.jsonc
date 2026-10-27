@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cloud-stack",
+  "compatibility_date": "2026-10-19",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "@tanstack/react-start/server-entry",
+  // Production is served at cloud-stack.<subdomain>.workers.dev; branches get Preview URLs.
+  "workers_dev": true,
+  "preview_urls": true,
+  // Required by `wrangler preview`, the preview command for non-production branches.
+  "previews": {},
+  "observability": { "enabled": true },
+}
