@@ -1,12 +1,15 @@
 import { defineConfig } from "vite-plus";
 
-// Generated files and build output: never formatted or linted.
+// Generated files, build output and vendored agent skills: never formatted or linted.
 const IGNORED = [
   "**/routeTree.gen.ts",
   "**/convex/_generated/**",
   "**/.output/**",
   "**/.wrangler/**",
   "**/dist/**",
+  ".agents/**",
+  ".claude/skills/**",
+  "skills-lock.json",
 ];
 
 export default defineConfig({

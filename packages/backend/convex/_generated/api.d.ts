@@ -8,7 +8,9 @@
  * @module
  */
 
-import type * as notes from "../notes.js";
+import type * as api_notes from "../api/notes.js";
+import type * as models_notes_functions from "../models/notes/functions.js";
+import type * as models_notes_table from "../models/notes/table.js";
 
 import type {
   ApiFromModules,
@@ -17,7 +19,9 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
-  notes: typeof notes;
+  "api/notes": typeof api_notes;
+  "models/notes/functions": typeof models_notes_functions;
+  "models/notes/table": typeof models_notes_table;
 }>;
 
 /**

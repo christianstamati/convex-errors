@@ -1,9 +1,7 @@
-import { defineSchema, defineTable } from "convex/server";
-import { v } from "convex/values";
+import { defineSchema } from "convex/server";
+import { notesTable } from "./models/notes/table";
 
 export default defineSchema({
-  // Example feature: delete this table and convex/notes.ts to remove it.
-  notes: defineTable({
-    text: v.string(),
-  }),
+  // Example feature: delete this table and convex/models/notes to remove it.
+  notes: notesTable,
 });

@@ -17,6 +17,12 @@ function is public, so add auth before you store anything private.
 | CI       | The Cloudflare build: check, test, build, then deploy                                   |
 | Deploy   | Cloudflare Workers Builds for the web app, Convex Cloud for the backend, with previews  |
 
+The backend follows
+[ianmacartney/code-organization-pattern](https://github.com/ianmacartney/code-organization-pattern).
+Each table's functions are defined in `convex/models/<table>/`, and `convex/api/<table>.ts`
+re-exports the ones that make up the public API. The web app calls them as
+`api.<table>.<function>` through `apps/web/src/lib/api.ts`.
+
 ## Run it locally
 
 You need Bun 1.4 and Node 24. No Convex account is needed to start.
@@ -104,8 +110,9 @@ To deploy production by hand instead: `bunx wrangler login` in `apps/web`, then
 
 Delete these files and lines, then run `bun run check`:
 
-- `packages/backend/convex/notes.ts` and `packages/backend/convex/notes.test.ts`
-- the `notes` table in `packages/backend/convex/schema.ts`
+- `packages/backend/convex/models/notes/`, `packages/backend/convex/api/notes.ts` and
+  `packages/backend/convex/tests/notes/`
+- the `notes` table and its import in `packages/backend/convex/schema.ts`
 - `apps/web/src/routes/notes.tsx`
 - the Notes link in `apps/web/src/routes/index.tsx`
 

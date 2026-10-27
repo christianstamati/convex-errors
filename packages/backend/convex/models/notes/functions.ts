@@ -1,15 +1,14 @@
-// Example feature: a shared notes list. There's no sign-in, so anyone can read and edit it.
 import { ConvexError, v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { mutation, query } from "../../_generated/server";
 
-export const list = query({
+const list = query({
   args: {},
   handler: async (ctx) => {
     return await ctx.db.query("notes").order("desc").take(100);
   },
 });
 
-export const create = mutation({
+const create = mutation({
   args: { text: v.string() },
   returns: v.id("notes"),
   handler: async (ctx, { text }) => {
@@ -21,7 +20,7 @@ export const create = mutation({
   },
 });
 
-export const remove = mutation({
+const remove = mutation({
   args: { id: v.id("notes") },
   returns: v.null(),
   handler: async (ctx, { id }) => {
@@ -31,3 +30,5 @@ export const remove = mutation({
     return null;
   },
 });
+
+export const notesApi = { list, create, remove };
