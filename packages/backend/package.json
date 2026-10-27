@@ -19,7 +19,7 @@
     "@edge-runtime/vm": "^5.0.0",
     "@types/node": "^24",
     "convex-test": "^0.0.65",
-    "typescript": "^6",
+    "typescript": "^7.0.2",
     "vite-plus": "catalog:"
   }
 }
