@@ -1,7 +1,17 @@
 // Runs each kind of failure through the client side, as a mutation's rejection would arrive.
+import { createAttempt } from "@cs-stack/convex-errors";
 import { ConvexError } from "convex/values";
-import { attempt, onCreateBotError, setLocale } from "./client";
-import { errors } from "./errors";
+import { errors } from "./convex/errors";
+import { onCreateBotError } from "./src/bots";
+import { de } from "./src/lib/de";
+
+let locale: "en" | "de" = "en";
+// Like src/lib/attempt.ts, with console.log for the toast so the demo runs in a terminal.
+const attempt = createAttempt(errors, {
+  onError: (message) => console.log(`  toast: ${message}`),
+  locale: () => (locale === "de" ? de : undefined),
+  log: () => {}, // keep the demo output short
+});
 
 const failing = (error: unknown) => Promise.reject(error);
 
@@ -22,11 +32,8 @@ const cases: [string, unknown][] = [
   ["a bug (plain Error)", new Error("Cannot read properties of undefined")],
 ];
 
-const originalError = console.error;
-console.error = () => {}; // attempt() logs the raw error; keep the demo output short
-
-for (const locale of ["en", "de"] as const) {
-  setLocale(locale);
+for (const next of ["en", "de"] as const) {
+  locale = next;
   console.log(`\n== ${locale} ==`);
   for (const [name, error] of cases) {
     console.log(name);
@@ -40,4 +47,3 @@ console.log(" ", onCreateBotError(errors.create("sign_in")));
 
 console.log("\n== what goes over the wire ==");
 console.log(" ", JSON.stringify(errors.create("not_found", { what: "bot" }).data));
-console.error = originalError;

@@ -1,5 +1,3 @@
-// The app's errors, declared once. Lives in convex/errors.ts so both the
-// backend and the frontend import it. It has no server code.
 import { defineErrors } from "@cs-stack/convex-errors";
 
 export const errors = defineErrors({
