@@ -12,8 +12,8 @@
     "examples/minimal": {
       "name": "minimal",
       "dependencies": {
+        "@cs-stack/convex-errors": "workspace:*",
         "convex": "^1.48.0",
-        "convex-errors": "workspace:*",
         "react": "^19.2.0",
         "react-dom": "^19.2.0",
       },
@@ -29,9 +29,9 @@
     "examples/monorepo/apps/web": {
       "name": "@monorepo/web",
       "dependencies": {
+        "@cs-stack/convex-errors": "workspace:*",
         "@monorepo/backend": "workspace:*",
         "convex": "^1.48.0",
-        "convex-errors": "workspace:*",
         "react": "^19.2.0",
         "react-dom": "^19.2.0",
         "sonner": "^2.0.8",
@@ -49,8 +49,8 @@
     "examples/monorepo/packages/backend": {
       "name": "@monorepo/backend",
       "dependencies": {
+        "@cs-stack/convex-errors": "workspace:*",
         "convex": "^1.48.0",
-        "convex-errors": "workspace:*",
       },
       "devDependencies": {
         "typescript": "^7.0.2",
@@ -59,11 +59,11 @@
     "examples/paraglide": {
       "name": "paraglide",
       "dependencies": {
+        "@cs-stack/convex-errors": "workspace:*",
         "@inlang/paraglide-js": "^2.29.2",
         "@tanstack/react-router": "1.170.46",
         "@tanstack/react-start": "1.169.4",
         "convex": "^1.48.0",
-        "convex-errors": "workspace:*",
         "react": "^19.2.0",
         "react-dom": "^19.2.0",
       },
@@ -77,8 +77,8 @@
       },
     },
     "packages/convex-errors": {
-      "name": "convex-errors",
-      "version": "0.0.0",
+      "name": "@cs-stack/convex-errors",
+      "version": "0.1.0",
       "devDependencies": {
         "@edge-runtime/vm": "^5.0.0",
         "@types/node": "^24",
@@ -163,6 +163,8 @@
     "@bytecodealliance/preview2-shim": ["@bytecodealliance/preview2-shim@0.24.1", "", { "dependencies": { "@bytecodealliance/jco-node-fs": "0.3.2" } }, "sha512-QGZsKD5M76xBhwu3BzLWqYDEpaMX90QWrrfhkQPn2pN9t378koumtdAVH4lr25mqGCZt10YNXkWvyWkw/vJbLQ=="],
 
     "@bytecodealliance/preview3-shim": ["@bytecodealliance/preview3-shim@0.6.1", "", { "dependencies": { "@bytecodealliance/jco-node-fs": "0.3.2", "@bytecodealliance/preview2-shim": "^0.25.0" } }, "sha512-61mEfjfgGmZhEMA0H3waawPKvYd3za9y0vJ7pmQz/9yvm4FR6Ef+cmqhnxDE7ezsM07MY1btP92ymmgsgFwxmg=="],
+
+    "@cs-stack/convex-errors": ["@cs-stack/convex-errors@workspace:packages/convex-errors"],
 
     "@edge-runtime/primitives": ["@edge-runtime/primitives@6.0.0", "", {}, "sha512-FqoxaBT+prPBHBwE1WXS1ocnu/VLTQyZ6NMUBAdbP7N2hsFTTxMC/jMu2D/8GAlMQfxeuppcPuCUk/HO3fpIvA=="],
 
@@ -627,8 +629,6 @@
     "convert-source-map": ["convert-source-map@2.0.0", "", {}, "sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg=="],
 
     "convex": ["convex@1.48.0", "", { "dependencies": { "esbuild": "0.27.0", "prettier": "^3.0.0", "ws": "8.21.0" }, "peerDependencies": { "@auth0/auth0-react": "^2.0.1", "@clerk/clerk-react": "^4.12.8 || ^5.0.0", "@clerk/react": "^6.4.3", "react": "^18.0.0 || ^19.0.0-0 || ^19.0.0" }, "optionalPeers": ["@auth0/auth0-react", "@clerk/clerk-react", "@clerk/react", "react"], "bin": { "convex": "bin/main.js" } }, "sha512-M9jEgTvCN8ziP/VgQQUH+j0ijM7g+NmQd8tFlvETK8/HMC/aaqHZwcu4hBO30X5DV2VIyYK4mOoLQGIb1766ew=="],
-
-    "convex-errors": ["convex-errors@workspace:packages/convex-errors"],
 
     "convex-helpers": ["convex-helpers@0.1.129", "", { "peerDependencies": { "@standard-schema/spec": "^1.0.0", "convex": "^1.46.0", "hono": "^4.0.5", "react": "^17.0.2 || ^18.0.0 || ^19.0.0", "typescript": "^5.5 || ^6.0.0 || ^7.0.0", "zod": "^3.25.0 || ^4.0.0" }, "optionalPeers": ["@standard-schema/spec", "hono", "react", "typescript", "zod"], "bin": { "convex-helpers": "bin.cjs" } }, "sha512-8QJLbym0fKsf3tYcF2ZTX37NeYt/BkOFBjBwB2LR1fXUAajeYaTLV11gi/0IVOU/jCdH2j/VseHhHid1qQcqFw=="],
 

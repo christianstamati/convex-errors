@@ -1,4 +1,4 @@
-# convex-errors
+# @cs-stack/convex-errors
 
 One consistent, typed way to define, throw, catch, show and translate errors in a Convex app.
 
@@ -11,7 +11,7 @@ One consistent, typed way to define, throw, catch, show and translate errors in 
 ## Install
 
 ```sh
-npm install convex-errors
+npm install @cs-stack/convex-errors
 ```
 
 `convex` 1.3 or newer is the only peer dependency. ESM only, Node 18 or newer.
@@ -21,7 +21,7 @@ npm install convex-errors
 Put them in `convex/errors.ts`. Each code maps to a function that returns its default message. The function's parameter is the code's params, which must be Convex values. The file has no server code, so the frontend can import it too.
 
 ```ts
-import { defineErrors } from "convex-errors";
+import { defineErrors } from "@cs-stack/convex-errors";
 
 export const errors = defineErrors({
   sign_in: () => "Sign in first.",
@@ -81,7 +81,7 @@ export const createBot = mutation({
 `createAttempt` runs what a click started and reports a failure instead of losing it as an unhandled rejection. Plug in any toast, for example sonner:
 
 ```ts
-import { createAttempt } from "convex-errors";
+import { createAttempt } from "@cs-stack/convex-errors";
 import { toast } from "sonner";
 import { errors } from "./errors";
 

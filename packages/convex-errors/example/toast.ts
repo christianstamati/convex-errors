@@ -1,4 +1,4 @@
-import { createAttempt } from "convex-errors";
+import { createAttempt } from "@cs-stack/convex-errors";
 import { toast } from "sonner";
 import { errors } from "./errors";
 

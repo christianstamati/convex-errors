@@ -10,8 +10,8 @@
     "dev": "convex dev"
   },
   "dependencies": {
-    "convex": "^1.48.0",
-    "convex-errors": "workspace:*"
+    "@cs-stack/convex-errors": "workspace:*",
+    "convex": "^1.48.0"
   },
   "devDependencies": {
     "typescript": "^7.0.2"

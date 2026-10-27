@@ -10,8 +10,8 @@
     "build": "vp build"
   },
   "dependencies": {
+    "@cs-stack/convex-errors": "workspace:*",
     "convex": "^1.48.0",
-    "convex-errors": "workspace:*",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
