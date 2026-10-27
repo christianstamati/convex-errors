@@ -1,6 +1,12 @@
-import { ConvexError } from "convex/values";
-
-/** The message to show when a mutation fails: a `ConvexError` message, or `fallback` for anything else. */
-export function errorMessage(error: unknown, fallback: string): string {
-  return error instanceof ConvexError && typeof error.data === "string" ? error.data : fallback;
-}
+export { defineErrors } from "./define";
+export type { Errors } from "./define";
+export { createAttempt } from "./attempt";
+export type {
+  Definitions,
+  ErrorData,
+  Issue,
+  Locale,
+  Messages,
+  ParsedError,
+  ReservedCode,
+} from "./types";

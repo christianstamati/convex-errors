@@ -1,4 +1,5 @@
-import { ConvexError, v } from "convex/values";
+import { v } from "convex/values";
+import { errors } from "./errors";
 import { mutation, query } from "./_generated/server";
 
 export const list = query({
@@ -14,7 +15,7 @@ export const create = mutation({
   handler: async (ctx, { text }) => {
     const trimmed = text.trim();
     if (trimmed.length === 0 || trimmed.length > 500) {
-      throw new ConvexError("A note must be 1 to 500 characters.");
+      throw errors.create("note_length", { max: 500 });
     }
     return await ctx.db.insert("notes", { text: trimmed });
   },

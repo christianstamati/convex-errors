@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "convex/react";
-import { errorMessage } from "convex-errors";
 import { useState } from "react";
 import { api } from "../convex/_generated/api";
+import { errors } from "../convex/errors";
 
 export function App() {
   const [text, setText] = useState("");
@@ -20,7 +20,7 @@ export function App() {
             setText("");
             setError(undefined);
           } catch (e) {
-            setError(errorMessage(e, "Couldn't add the note."));
+            setError(errors.message(e, { fallback: "Couldn't add the note." }));
           }
         }}
       >

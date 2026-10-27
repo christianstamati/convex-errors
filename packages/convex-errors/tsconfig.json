@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["ES2022"],
+    "lib": ["ES2022", "DOM"],
     "module": "ESNext",
     "moduleResolution": "bundler",
     "verbatimModuleSyntax": true,
     "allowImportingTsExtensions": true,
     "noEmit": true,
     "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "types": ["vite/client"]
   },
-  "include": ["src"]
+  "include": ["src", "test", "example"]
 }
