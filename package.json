@@ -1,5 +1,5 @@
 {
-  "name": "tanstack-convex-starter",
+  "name": "convex-errors-workspace",
   "version": "0.0.0",
   "private": true,
   "workspaces": {
@@ -14,11 +14,10 @@
   },
   "type": "module",
   "scripts": {
-    "setup": "bun scripts/setup.ts",
-    "dev": "bun scripts/sync-env.ts && vp run --parallel --log labeled --filter './apps/*' --filter './packages/*' dev",
+    "dev": "bun run --cwd apps/demo dev",
     "build": "vp run --filter './apps/*' build",
     "check": "vp check",
-    "test": "vp run --filter './apps/*' --filter './packages/*' test",
+    "test": "vp run --filter './packages/*' test",
     "prepare": "vp config"
   },
   "devDependencies": {

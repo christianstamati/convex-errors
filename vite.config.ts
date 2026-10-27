@@ -3,10 +3,7 @@ import { defineConfig } from "vite-plus";
 // Generated files, build output and the files `convex ai-files install` writes: never
 // formatted or linted, so `convex ai-files status` keeps matching.
 const IGNORED = [
-  "**/routeTree.gen.ts",
   "**/convex/_generated/**",
-  "**/.output/**",
-  "**/.wrangler/**",
   "**/dist/**",
   ".agents/**",
   ".claude/skills/**",

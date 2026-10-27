@@ -1,0 +1,25 @@
+{
+  "name": "demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --parallel dev:web dev:convex",
+    "dev:web": "vp dev",
+    "dev:convex": "convex dev",
+    "build": "vp build"
+  },
+  "dependencies": {
+    "convex": "^1.48.0",
+    "convex-errors": "workspace:*",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^6.0.1",
+    "typescript": "^7.0.2",
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
+  }
+}

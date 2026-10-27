@@ -1,0 +1,19 @@
+{
+  "name": "convex-errors",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vp test run"
+  },
+  "devDependencies": {
+    "convex": "^1.48.0",
+    "typescript": "^7.0.2",
+    "vite-plus": "catalog:"
+  },
+  "peerDependencies": {
+    "convex": "^1.48.0"
+  }
+}
